@@ -1,0 +1,35 @@
+﻿@page "/"
+
+@using Cat.Memes.Shared
+
+@inject HttpClient _client
+
+<PageTitle>Cet memes</PageTitle>
+
+@if (_catMemes is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+        @foreach (var catMeme in _catMemes)
+        {
+            <div>
+                <img src="@catMeme.Image"
+                     width="500px"
+                     alt="A cat meme"/>
+            </div>
+        }
+    </div>
+}
+
+@code
+{
+    private List<CatMeme>? _catMemes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _catMemes = await _client.GetFromJsonAsync<List<CatMeme>>("cat");
+    }
+}
