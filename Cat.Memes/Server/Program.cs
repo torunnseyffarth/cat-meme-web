@@ -1,4 +1,3 @@
-using Azure.Identity;
 using Cat.Memes.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
